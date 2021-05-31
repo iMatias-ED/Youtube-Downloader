@@ -8,10 +8,13 @@ class Frame(QFrame):
 
         self.setStyles()
     
+    
     def setStyles(self):
         self.setStyleSheet(
             u'''
-                background: black;
+                background: #303030;
+                border: 3px solid black;
+                border-radius: 10px;
             '''
         )
 

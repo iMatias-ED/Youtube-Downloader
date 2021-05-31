@@ -16,8 +16,11 @@ class Ui_MainWindow(QMainWindow):
 
     def setupUi(self, mainwindow):
         mainwindow.setFixedSize(500, 600)
+        mainwindow.setStyleSheet(u"background: #0cbccc")
 
         self.presentation = PresentationFrame(self, 15, 15, 470, 130)
+        self.presentation.setupUi()
+
         self.input = URLInputFrame(self, 15, 160, 470, 40)
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
 
