@@ -4,6 +4,10 @@ from PySide2.QtWidgets import *
 
 #Components import
 from super_frame import *
+from presentation import *
+from inputUrl import *
+from preview import *
+from progressBar import *
 
 #Main Window
 class Ui_MainWindow(QMainWindow):
@@ -13,8 +17,14 @@ class Ui_MainWindow(QMainWindow):
     def setupUi(self, mainwindow):
         mainwindow.setFixedSize(500, 600)
 
-        self.top = Frame(self, 10, 10, 400, 400)
+        self.presentation = PresentationFrame(self, 15, 15, 470, 130)
+        self.input = URLInputFrame(self, 15, 160, 470, 40)
+        self.preview = PreviewFrame(self, 15, 215, 470, 175)
 
+        self.leftSquare = Frame(self, 15, 405, 227.5, 140)
+        self.rightSquare = Frame(self, 257.5, 405, 227.5, 140)
+
+        self.progressBar = ProgressBarFrame(self, 15, 560, 470, 25)
 
 
 
