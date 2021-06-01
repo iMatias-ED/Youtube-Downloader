@@ -7,10 +7,11 @@ class PresentationFrame(Frame):
     def setupUi(self):
 
         #logo
-        image = QLabel(self)
-        pixmapLogo = QPixmap("caiman.png")
-        image.setPixmap(pixmapLogo)
-        image.setGeometry(10,10,110,110)
+        logoImage = QLabel(self)
+        pixmapLogo = QPixmap("source/logo.png")
+        logoImage.setPixmap(pixmapLogo)
+        logoImage.setGeometry(10,10,110,110)
+        logoImage.setStyleSheet("border: 0px;")
 
                 #big title
         title = QLabel(self)
@@ -49,7 +50,7 @@ class PresentationFrame(Frame):
 
         #Instagram
         instagramLogo = QLabel(self)
-        pixmapIg = QPixmap("ig.png")
+        pixmapIg = QPixmap("source/ig.png")
         instagramLogo.setPixmap(pixmapIg)
         instagramLogo.setGeometry(130,90,30,30)
         instagramLogo.setStyleSheet(u"border: 0px;")
@@ -69,7 +70,7 @@ class PresentationFrame(Frame):
 
         #Linkedin
         githubLogo = QLabel(self)
-        pixmapGitHub = QPixmap("github.png")
+        pixmapGitHub = QPixmap("source/github.png")
         githubLogo.setPixmap(pixmapGitHub)
         githubLogo.setGeometry(295,93,30,30)
         githubLogo.setStyleSheet(u"border: 0px;")

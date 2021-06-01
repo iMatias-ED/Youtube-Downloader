@@ -22,9 +22,11 @@ class Ui_MainWindow(QMainWindow):
         self.presentation.setupUi()
 
         self.input = URLInputFrame(self, 15, 160, 470, 40)
+
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
 
         self.leftSquare = Frame(self, 15, 405, 227.5, 140)
+        
         self.rightSquare = Frame(self, 257.5, 405, 227.5, 140)
 
         self.progressBar = ProgressBarFrame(self, 15, 560, 470, 25)
