@@ -22,6 +22,7 @@ class Ui_MainWindow(QMainWindow):
         self.presentation.setupUi()
 
         self.input = URLInputFrame(self, 15, 160, 470, 40)
+        self.input.setupUi()
 
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
 
