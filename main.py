@@ -25,6 +25,7 @@ class Ui_MainWindow(QMainWindow):
         self.input.setupUi()
 
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
+        self.preview.setupUi()
 
         self.leftSquare = Frame(self, 15, 405, 227.5, 140)
         
