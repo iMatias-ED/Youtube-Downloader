@@ -1,3 +1,4 @@
+from youtube import YoutubeVideo
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
@@ -23,6 +24,8 @@ class Ui_MainWindow(QMainWindow):
 
         self.input = URLInputFrame(self, 15, 160, 470, 40)
         self.input.setupUi()
+        self.input.searchButton.clicked.connect(lambda:self.chargeVideo(self.input.url.text()))        
+   
 
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
         self.preview.setupUi()
@@ -32,6 +35,11 @@ class Ui_MainWindow(QMainWindow):
         self.rightSquare = Frame(self, 257.5, 405, 227.5, 140)
 
         self.progressBar = ProgressBarFrame(self, 15, 560, 470, 25)
+    
+    def chargeVideo(self, url):
+        self.preview.videoData(url)
+
+
 
 
 
