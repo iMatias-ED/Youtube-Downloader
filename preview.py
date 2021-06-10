@@ -40,9 +40,6 @@ class PreviewFrame(Frame):
         #Video Quality selector
         self.quality = QComboBox(self)
         self.quality.setGeometry(197.5, 127, 75, 18)
-
-        #self.quality.insertItems(0, self.items)
-
         self.quality.setStyleSheet(
             '''
                 color: #DBE1E1;
@@ -68,60 +65,44 @@ class PreviewFrame(Frame):
                 }
             '''
         )
-        self.downloadButton.clicked.connect(self.getDirectoryPath)
     
-    def videoData(self, url):
-        print("funcion video data llamada")
+    def getDirectoryPath(self):
+        path = QFileDialog.getExistingDirectory(self, "Seleccione el directorio de descarga")
+        quality = self.quality.currentText()
+        self.video.downloadVideo(quality, path)
+
+    def getVideoInfo(self, url):
+        #create Youtube Object
         self.video = YoutubeVideo(url)
 
-        self.title.setText(self.video.title)
-
-        #charge video thumbnail
+        #get video thumbnail
         url_image = self.video.thumbnail_url
         manager = QNetworkAccessManager(self)
-        manager.finished.connect(self.onFinished)
+        manager.finished.connect(self.setPreviewInfo)
         manager.get(QNetworkRequest(QUrl(url_image)))
 
+        #filter by resolution for qualitySelector
+        self.items = []
         resolutions = self.video.streams.filter(file_extension="mp4", progressive=True)
-        items = []
-
         for i in resolutions:
-            items.append(i.resolution)
-
-        self.quality.insertItems(0, items)
-
-        #mp4 = video.streams.get_by_itag(itag)
-        #mp4.download()
+            self.items.append(i.resolution)
 
 
+    def setPreviewInfo(self, reply):
 
-
-        
-    def onFinished(self, reply):
-        print("En teoria cargando la imagen")
+        #Convert QImage to QPixmap
         qimage = QImage.fromData(reply.readAll())
-
         image = QPixmap.fromImage(qimage)
         image = image.scaledToWidth(155)
         image = image.scaledToHeight(87)
 
+        #set
         self.thumbnail.setPixmap(image)
+        self.title.setText(self.video.title)
+        self.quality.insertItems(0, self.items)
         
-    def getDirectoryPath(self):
-        path = QFileDialog.getExistingDirectory(self, "Seleccione el directorio de descarga")
-        quality = self.quality.currentText()
-        self.downloadVideo(quality, path)
 
 
-    def downloadVideo(self, quality, path):
-        select_video = self.video.streams.filter(resolution=quality, progressive=True)
-        
-        start = str(select_video).find("\"")
-        end = str(select_video).find("mime_type")
-        itag = str(select_video)[start+1 :end-2]
-        itag = int(itag)
 
-        stream = self.video.streams.get_by_itag(itag)
-        stream.download(path)
         
     

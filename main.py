@@ -24,22 +24,28 @@ class Ui_MainWindow(QMainWindow):
 
         self.input = URLInputFrame(self, 15, 160, 470, 40)
         self.input.setupUi()
-        self.input.searchButton.clicked.connect(lambda:self.chargeVideo(self.input.url.text()))        
-   
+        self.input.searchButton.clicked.connect(lambda:self.chargeVideoPreview(self.input.url.text()))           
 
         self.preview = PreviewFrame(self, 15, 215, 470, 175)
         self.preview.setupUi()
+        self.preview.downloadButton.clicked.connect(self.Download)
 
         self.leftSquare = Frame(self, 15, 405, 227.5, 140)
         
         self.rightSquare = Frame(self, 257.5, 405, 227.5, 140)
 
         self.progressBar = ProgressBarFrame(self, 15, 560, 470, 25)
-    
-    def chargeVideo(self, url):
-        self.preview.videoData(url)
+        self.progressBar.setupUi()
+        
+    def chargeVideoPreview(self, url):
+        self.preview.getVideoInfo(url)
 
+    def Download(self):
+        video = self.preview.video
 
+        video.receiveProgressBar(self.progressBar.p_bar)
+
+        self.preview.getDirectoryPath()
 
 
 
